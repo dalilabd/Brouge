@@ -22,6 +22,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'role' => 'required|string|in:admin,user',
         ]);
 
         $user = User::create([
@@ -31,7 +32,8 @@ class UserController extends Controller
         ]);
 
         // Assign role 'user' to the newly created user
-        $user->assignRole('user');
+        // $user->assignRole('user');
+        $user->assignRole($request->role);
 
         // Send email (optional)
         // Mail::to($user->email)->send(new UserAdded($user));

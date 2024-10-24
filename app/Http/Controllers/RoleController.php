@@ -18,10 +18,11 @@ class RoleController extends Controller
     {
         $request->validate([
             'name' => 'required|string|unique:roles',
+            'permissions' => 'sometimes|array',
+            'permissions.*' => 'exists:permissions,name',
         ]);
 
         $role = Role::create($request->all());
-
         return new RoleResource($role);
     }
 

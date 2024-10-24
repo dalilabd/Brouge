@@ -13,6 +13,17 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Get(
+     *     path="/api/documents",
+     *     summary="Get all documents",
+     *     tags={"Documents"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Success"
+     *     )
+     * )
+     */
     public function index()
     {
         // Retrieve all documents with user association

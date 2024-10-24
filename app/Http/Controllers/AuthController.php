@@ -31,7 +31,7 @@ class AuthController extends Controller
 
     // Generate API token for the user
     $token = $user->createToken('auth_token')->plainTextToken;
-
+    $name_user = $request->name;
     // Get the user's roles and permissions
     $roles = $user->getRoleNames();
     $permissions = $user->getAllPermissions()->pluck('name');
@@ -40,6 +40,7 @@ class AuthController extends Controller
         'message' => 'User registered successfully',
         'token' => $token,
         'roles' => $roles,
+        'name_user' => $name_user,
         'permissions' => $permissions,
     ]);
 }
@@ -66,6 +67,7 @@ public function login(Request $request)
 
     return response()->json([
         'token' => $token,
+        'name_user' => $user->name,
         'roles' => $roles,
         'permissions' => $permissions,
     ]);
